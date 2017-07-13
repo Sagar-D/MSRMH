@@ -7,34 +7,37 @@ router.get('/emp/applyForEncashment',onRequest);
 
 function onRequest(request,response){
 
-	var obj = [];
+	var list = [];
 	console.log("Got a request for applyForEncashment...");
 
 	if(request.session.username){
 
 		mongoClient.connect("mongodb://localhost:27017/msrmh",function(err,db){
 
-			if(err) throw err;
+			if(err) response.render("login",{message : "We encountered an Error. Please try again."},null);
 
 			var date = new Date();
 			var val = date.getMonth()+1;
 			val += " ";
 			val += date.getFullYear();
 			db.collection('requests').findOne({"_id" : "7 2017"},function(err,result){
-				if(err) throw err;
+				if(err) response.render("login",{message : "We encountered an Error. Please try again."},null);
 
-				
+				if(result!=null){
 
-				for(var i=0;i<result.requestlist.length;i++){
-					if(result.requestlist[i].empId == request.session.username){
-						console.log(result.requestlist[i])
-						obj.push(result.requestlist[i]);
+					for(var i=0;i<result.requestlist.length;i++){
+						if(result.requestlist[i].empId == request.session.username){
+							console.log(result.requestlist[i])
+							list.push(result.requestlist[i]);
+						}
 					}
+					console.log("......")
+					console.log(list.length)
+					console.log(list)
+					response.render('emp/applyForEncashment',{"list" : list,"obj" : ""},null);
+				}else{
+					response.render('emp/applyForEncashment',{"list" : list,"obj" : ""},null);
 				}
-				console.log("......")
-				console.log(obj.length)
-				console.log(obj)
-				response.render('emp/applyForEncashment',{"obj" : obj},null);
 			})
 
 

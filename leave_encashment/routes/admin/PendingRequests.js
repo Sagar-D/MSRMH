@@ -18,7 +18,7 @@ var details=new Schema({
     applicationDate:String,
     name:String,
     type:String,
-    approved:Boolean,
+    approved:String,
     department:String,
     noLeavesSurrendered:Number,
     report_id:String
@@ -54,7 +54,7 @@ router.get('/',function (request,respond) {
 
         try{
         requestData.findById(idforrequest).then(function (doc) {
-            var obj={"empId":"MH13","applicationDate":"14 9 2014","type":"SL","name":"abcd","approved":false,"department":"Doctor","noLeavesSurrendered":30};
+           // var obj={"empId":"MH13","applicationDate":"14 9 2014","type":"SL","name":"swaroop","approved":"pending","department":"Doctor","noLeavesSurrendered":30};
 
             try{
                 console.log(doc.requestlist);
@@ -122,7 +122,7 @@ router.post('/getindividualreport',function (request,respond,next) {
         var j=0;
         while(i<=request.body.index)                     //this is done so that we get the correct index of unapproved
         {
-            if(requestobj[j].approved)
+            if(requestobj[j].approved=="approved")
             {i++;}
             j++;
         }

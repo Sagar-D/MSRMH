@@ -15,50 +15,58 @@ router.post('/validate',function(request,response){
 	var login = false;
 	var isAdmin = false;
 
-	mongoClient.connect("mongodb://localhost:27017/msrmh",function(err,db){
 
-		if(err) throw err;
+	try{
+		mongoClient.connect("mongodb://localhost:27017/msrmh",function(err,db){
 
-		db.collection("userlogin").findOne({"_id" : request.body.username },function(err,result){
-			if(err) throw err;
+			if(err) response.render("login",{message : "We encountered an Error. Please try again."},null);
 
-			if(!result){
-				response.render("login",{message : "Invalid username. Please try again."},null);
-			}else{
+			db.collection("userlogin").findOne({"_id" : request.body.username },function(err,result){
+				if(err) response.render("login",{message : "We encountered an Error. Please try again."},null);
 
-				if(result.password === request.body.password){
-					login=true;
-					isAdmin = result.admin;
-					
+				if(!result){
+					response.render("login",{message : "Invalid username. Please try again."},null);
 				}
+				else{
 
-				if(login){
-					request.session.username=request.body.username;
-					request.session.password=request.body.password;
-					request.session.admin=false;
-console.log(request.body.admin)
-					if(request.body.admin == "true"){
-						if(isAdmin){
-							request.session.admin=true;
-							response.redirect(303,"/admin/admin");	
+					if(result.password === request.body.password){
+						login=true;
+						isAdmin = result.admin;
+						
+					}
+
+					if(login){
+						request.session.username=request.body.username;
+						request.session.password=request.body.password;
+						request.session.admin=false;
+						if(request.body.admin == "true"){
+							if(isAdmin){
+								request.session.admin=true;
+								response.redirect(303,"/admin/admin");	
+							}
+							else{
+								response.render("login",{message : "Sorry, You Dont have admin privilage."},null);
+							}
 						}
-						else{
-							response.render("login",{message : "Sorry, You Dont have admin privilage."},null);
-						}
+						else
+							response.redirect(303,"/emp/profile");
 					}
 					else
-						response.redirect(303,"/emp/profile");
+						response.render("login",{message : "Invalid username or password. Please try again."},null);
 				}
-				else
-					response.render("login",{message : "Invalid username or password. Please try again."},null);
-			}
-			
-			console.log(result);
-			
+				
+				console.log(result);
+				
+			})
+
+
 		})
+	}
+	catch(e){
+		response.render("login",{message : "We encountered an Error. Please try again."},null);
+	}
 
-
-	})
+	
 
 
 

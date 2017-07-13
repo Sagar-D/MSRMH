@@ -67,7 +67,29 @@ tr:nth-child(even) td{
 
 
 </style>
+<script type="text/javascript">
+  
+  function enablebt(name){
 
+    var bt;
+    switch(name){
+      case 'el' : bt = document.getElementById('btel');
+                  break;
+      case 'cl' : bt = document.getElementById('btcl');
+                  break;
+      case 'sl' : bt = document.getElementById('btsl');
+                  break;
+    }
+
+    
+    if(bt.disabled)
+      bt.disabled=false;
+    else
+      bt.disabled=true;
+
+  }
+
+</script>
 
 </head>
 <body style="padding:0px;margin:0px">
@@ -81,13 +103,21 @@ tr:nth-child(even) td{
 <ul class="mylist">
 <li class="my"><b>Leave Encashment</b></li>
 <a href='/logout'><li class="my" style="float:right";>Logout</li></a>
-<a href='#'><li class="my" style="float:right";>Apply Encashment</li></a>
+<a href='/emp/applyForEncashment'><li class="my" style="float:right";>Apply Encashment</li></a>
 <a href='/emp/profile'><li class="my" style="float:right";>My Profile</li></a>
 </ul>
 </nav>
 
-
-
+<% 
+if(obj!=""){
+%>
+<br><br>
+<h1 align="center"><%=obj.header%></h1>
+<p align="center" ><%=obj.msg%></p>
+<br><br>
+<%
+}
+%>
 <div class="container">
 <div class="row">
 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" >
@@ -103,7 +133,10 @@ tr:nth-child(even) td{
 <li>Remaining EL's are carried forward to next year in year end</li>
 </ul>
 <div align="center">
-<button onclick="window.location.href='verifyEncashment/EL'" align="center" style="background: #352960; color:#ffffff; border: 2px solid #352960; border-radius: 4px; margin : 10px;padding: 10px;">Apply For Encashment</button>
+<br>
+<input type="checkbox" id="elbox" onclick="enablebt('el')" /> I Agree to Rules and Conditions.
+<br>
+<button disabled id="btel" class="btn" onclick="window.location.href='/emp/verifyEncashment/el'" align="center" style="background: #352960; color:#ffffff; border: 2px solid #352960; border-radius: 4px; margin : 10px;padding: 10px;">Apply For Encashment</button>
 </div>
 </div>
 </div>
@@ -120,7 +153,10 @@ tr:nth-child(even) td{
 <br>
 </ul>
 <div align="center">
-<button onclick="window.location.href='verifyEncashment/CL'" align="center" style="background: #352960; color:#ffffff; border: 2px solid #352960; border-radius: 4px; margin : 10px;padding: 10px;">Apply For Encashment</button>
+<br>
+<input type="checkbox" id="clbox" onclick="enablebt('cl')" /> I Agree to Rules and Conditions.
+<br>
+<button disabled id="btcl" class="btn" onclick="window.location.href='/emp/verifyEncashment/cl'" align="center" style="background: #352960; color:#ffffff; border: 2px solid #352960; border-radius: 4px; margin : 10px;padding: 10px;">Apply For Encashment</button>
 </div>
 </div>
 </div>
@@ -136,7 +172,10 @@ tr:nth-child(even) td{
 <li>Remaining SL's are carried forward to next year</li>
 </ul>
 <div align="center">
-<button onclick="window.location.href='verifyEncashment/SL'" align="center" style="background: #352960; color:#ffffff; border: 2px solid #352960; border-radius: 4px; margin : 10px;padding: 10px;">Apply For Encashment</button>
+<br>
+<input type="checkbox" id="slbox" onclick="enablebt('sl')" /> I Agree to Rules and Conditions.
+<br>
+<button disabled id="btsl" class="btn" onclick="window.location.href='/emp/verifyEncashment/sl'" align="center" style="background: #352960; color:#ffffff; border: 2px solid #352960; border-radius: 4px; margin : 10px;padding: 10px;">Apply For Encashment</button>
 </div>
 </div>
 </div>
@@ -152,14 +191,15 @@ tr:nth-child(even) td{
 <th> Application Date </th><th> Application Type </th><th>Application Status</th>
 </tr>
 <%
-for(i=0;i<obj.length;i++){
+for(i=0;i<list.length;i++){
 %>
 <tr>
-<td> <%= obj[i].applicationDate %> </td><td> <%= obj[i].type %> </td><td> <%= (obj[i].approved) ? "Approved" : "Pending" %> </td>
+<td> <%= list[i].applicationDate %> </td><td> <%= list[i].type %> </td><td> <%= list[i].approved %> </td>
 </tr>
 <%
 }
 %>
 </table>
+<br><br><br>
 </body>
 </html>

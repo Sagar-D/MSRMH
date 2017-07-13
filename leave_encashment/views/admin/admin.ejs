@@ -48,6 +48,7 @@
         var basePay;
         var btn;
         var anchor;
+        var anchorreject;
         var totalsumdisplay;
 
         function calculateTotalPay(i) {
@@ -59,10 +60,11 @@
 
             var c="approveanchor"+i;
             var d="approvebt"+i;
+            var e="rejectanchor"+i;
 
             btn=document.getElementById(d);
             anchor=document.getElementById(c);
-
+            anchorreject = document.getElementById(e)
             var e='totalsum'+i;
             totalsumdisplay=document.getElementById(e);
 
@@ -76,7 +78,10 @@
                 if(btn.innerHTML==" APPROVE "){
                     btn.disabled=false;
                     var link='/requestprocessing/'+i+'/'+daa.value+'/'+basePay.value+'/approved';
+                    var link2='/requestprocessing/'+i+'/'+daa.value+'/'+basePay.value+'/rejected';
                     anchor.setAttribute("href",link);
+                    anchorreject.setAttribute("href",link);
+
                 }
                 totalsumdisplay.innerHTML="Total : "+totalPay;
             }
@@ -90,64 +95,64 @@
 
     </script>
 
-<style>
-div.logo{
-background:#352960;
-height:100%;
-width: 100%;
-margin : 0;
-padding: 15px;
-}
-ul.mylist{
-  background-color:#352960;
-  color: white;
-  margin-top: 1px;
-}
-ul li.my{
-  background-color: #352960;
-  display: inline-block;
-  padding: 15px;
-  font-family:comic sans ms;  
-  color: #ffffff;
-}
+    <style>
+        div.logo{
+            background:#352960;
+            height:100%;
+            width: 100%;
+            margin : 0;
+            padding: 15px;
+        }
+        ul.mylist{
+            background-color:#352960;
+            color: white;
+            margin-top: 1px;
+        }
+        ul li.my{
+            background-color: #352960;
+            display: inline-block;
+            padding: 15px;
+            font-family:comic sans ms;
+            color: #ffffff;
+        }
 
-ul a{
-  text-decoration: none;
-  color: #ffffff;
-}
-ul a:hover{
-  color: #352940;
-}
-body {
-  background: #ffffff;   
-}
-
-
+        ul a{
+            text-decoration: none;
+            color: #ffffff;
+        }
+        ul a:hover{
+            color: #352940;
+        }
+        body {
+            background: #ffffff;
+        }
 
 
-table {
-    background-color:white;
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-
-tr:nth-child(even) td{
-    border-left: 1px solid #ffffff;
-}
 
 
-</style>
+        table {
+            background-color:white;
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        tr:nth-child(even) td{
+            border-left: 1px solid #ffffff;
+        }
+
+
+    </style>
 
 
 </head>
@@ -160,12 +165,12 @@ tr:nth-child(even) td{
 
 
 <nav>
-<ul class="mylist">
-<li class="my"><b>Leave Encashment</b></li>
-<a href='/logout'><li class="my" style="float:right";>Logout</li></a>
-<a href='/admin/generateReports'><li class="my" style="float:right";>Generate Report</li></a>
-<a href='#'><li class="my" style="float:right;">Encashment Requests</li></a>
-</ul>
+    <ul class="mylist">
+        <li class="my"><b>Leave Encashment</b></li>
+        <a href='/logout'><li class="my" style="float:right";>Logout</li></a>
+        <a href='/admin/generateReports'><li class="my" style="float:right";>Generate Report</li></a>
+        <a href='#'><li class="my" style="float:right;">Encashment Requests</li></a>
+    </ul>
 </nav>
 
 
@@ -236,15 +241,45 @@ tr:nth-child(even) td{
     }
 
     function  removeapprovebutton(i) {
+
         var a='approvebt'+i;
-        var b='calc'+i;
         var btn=document.getElementById(a);
-        var btcalc = document.getElementById(b);
         btn.disabled =true;
-        btn.innerHTML="Request Approved";
+
+
+        var c='rejectbt'+i;
+        var btreject = document.getElementById(c);
+        btreject.disabled=true;
+
+        var d='text'+i;
+        var text = document.getElementById(d);
+        text.innerHTML="Request Approved";
+
+        var b='calc'+i;
+        var btcalc = document.getElementById(b);
         btcalc.disabled=true;
 
 
+
+    }
+
+
+    function  removerejectbutton(i) {
+        var a='approvebt'+i;
+        var btn=document.getElementById(a);
+        btn.disabled =true;
+
+        var c='rejectbt'+i;
+        var btreject = document.getElementById(c);
+        btreject.disabled=true;
+
+        var d='text'+i;
+        var text = document.getElementById(d);
+        text.innerHTML="Request Rejected";
+
+        var b='calc'+i;
+        var btcalc = document.getElementById(b);
+        btcalc.disabled=true;
 
     }
 
@@ -288,15 +323,15 @@ tr:nth-child(even) td{
 
                     <% for(var i=0; i < data.length; i++) { %>
 
-                <%if(layout===1) {%>
-                <%if(!(data[i].approved)) {%>
+                    <%if(layout===1) {%>
+                    <%if((data[i].approved=='pending')) {%>
                 <tr  onClick="showDetails('bt<%=i %>','<%=i%>')" >
 
                     <td><%=i%></td>
 
                     <td >
 
-                            <%= data[i].empId %>
+                        <%= data[i].empId %>
                     </td>
                     <td><%= data[i].name %></td>
                     <td><%= data[i].department %></td>
@@ -305,6 +340,10 @@ tr:nth-child(even) td{
 
                 </tr>
 
+                <% if(data[i].type=="EL")
+                {
+
+                %>
 
                 <div id="<%= i %>" class="modal" style="display : none;" >
 
@@ -313,43 +352,100 @@ tr:nth-child(even) td{
                         <span  class="close" style="padding:10px;" onClick="onSpanClick('<%=i %>')" >&times;</span>
                         <div class="container">
                             <div class="row">
-                            <div align="center" class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
-                            </div>
-                            <div align="center" class="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                            <br>
-                            <legend>Employee Info</legend>
-                            <div align="left" style="margin-top:80px;margin-left:30px;">
-                            <strong>Staff No &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].empId %><br><br>
-                            <strong>Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].name %><br><br>
-                            <strong>Department &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].department %><br><br>
-                            <strong>Leave Request Type &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].type %><br><br>
-                            <strong>Number of Leaves Surrendered &emsp;:&emsp;&emsp;</strong><%= data[i].noLeavesSurrendered %><br><br>
-                            </div>
-                            </div>
+                                <div align="center" class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                </div>
+                                <div align="center" class="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                    <br>
+                                    <legend>Employee Info</legend>
+                                    <div align="left" style="margin-top:80px;margin-left:30px;">
+                                        <strong>Staff No &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].empId %><br><br>
+                                        <strong>Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].name %><br><br>
+                                        <strong>Department &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].department %><br><br>
+                                        <strong>Leave Request Type &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].type %><br><br>
+                                        <strong>Number of Leaves Surrendered &emsp;:&emsp;&emsp;</strong><%= data[i].noLeavesSurrendered %><br><br>
+                                    </div>
+                                </div>
                                 <div align="center" class="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-xl-5" >
                                     <br/>
                                     <div class="form-style-5">
 
-                                            <fieldset >
-                                                <legend>Enter Info</legend>
-                                                <input id="<%='daa'+i%>" type="number" name="field1" placeholder="DAA" required="required"  style="color:blue" >
-                                                <input id="<%='basePay'+i%>" type="number" name="field2" placeholder="BasePay" required="required" style="color:blue">
-                                                <p id="<%='totalsum'+i%>" style="color:black;font-size: 40px;padding:10px;margin:30px;"> Total : </p>
-                                                <button id="<%='calc'+i%>" class="btn" onclick="calculateTotalPay(<%=i%>)" value="CALCULATE" style="color:#ffffff; background-color: #352960;width  :300px;">Calculate</button>
-                                            </fieldset>
+                                        <fieldset >
+                                            <legend>Enter Info</legend>
+                                            <input id="<%='daa'+i%>" type="number" name="field1" placeholder="DAA" required="required"  style="color:blue" >
+                                            <input id="<%='basePay'+i%>" type="number" name="field2" placeholder="BasePay" required="required" style="color:blue">
+                                            <p id="<%='totalsum'+i%>" style="color:black;font-size: 40px;padding:10px;margin:30px;"> Total : </p>
+                                            <button id="<%='calc'+i%>" class="btn" onclick="calculateTotalPay(<%=i%>)" value="CALCULATE" style="color:#ffffff; background-color: #352960;width  :300px;">Calculate</button>
+                                        </fieldset>
 
 
                                     </div>
                                     <br><br><br>
 
-                                    <a id="<%='approveanchor'+i%>" href="#" ><button onclick="removeapprovebutton(<%=i%>)" disabled class="btn"  align="center" id="<%='approvebt'+i%>" style="color:#ffffff; background-color: #352960;width  :300px;" > APPROVE </button></a>
 
+                                    <a id="<%='approveanchor'+i%>" href="#" ><button onclick="removeapprovebutton(<%=i%>)" disabled class="btn"  align="center" id="<%='approvebt'+i%>" style="color:#ffffff; background-color: #352960;width  :300px;" > APPROVE </button></a>
+                                    <br><br><br>
+                                    <a id="<%='rejectanchor'+i%>" href="<%='/requestprocessing/'+i+'/0/0'+'/rejected'%>" ><button onclick="removerejectbutton(<%=i%>)"  class="btn"  align="center" id="<%='rejectbt'+i%>" style="color:#ffffff; background-color: #352960;width  :300px;" > REJECT </button></a>
+                                    <br><br><br>
+                                    <h3 id="<%='text'+i%>"></h3>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
+
+                <%
+                }
+                else{
+                    %>                }
+                <div id="<%= i %>" class="modal" style="display : none;" >
+
+                <!-- Modal content -->
+                <div class="modal-content" style="margin:70px;margin-top:100px;padding:30px;">
+                    <span  class="close" style="padding:10px;" onClick="onSpanClick('<%=i %>')" >&times;</span>
+                    <div class="container">
+                        <div class="row">
+                            <div align="center" class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                            </div>
+                            <div align="center" class="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                <br>
+                                <legend>Employee Info</legend>
+                                <div align="left" style="margin-top:80px;margin-left:30px;">
+                                    <strong>Staff No &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].empId %><br><br>
+                                    <strong>Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].name %><br><br>
+                                    <strong>Department &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].department %><br><br>
+                                    <strong>Leave Request Type &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].type %><br><br>
+                                    <strong>Number of Leaves Surrendered &emsp;:&emsp;&emsp;</strong><%= data[i].noLeavesSurrendered %><br><br>
+                                </div>
+                            </div>
+                            <div align="center" class="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-xl-5" >
+                                <br/>
+                                <div class="form-style-5">
+
+                                    <fieldset >
+                                        <legend>Enter Info</legend>
+
+                                    </fieldset>
+
+
+                                </div>
+                                <br><br><br>
+
+
+                                <a id="<%='approveanchor'+i%>" href="<%='/requestprocessing/'+i+'/0/0'+'/approved'%>" ><button onclick="removeapprovebutton(<%=i%>)" class="btn"  align="center" id="<%='approvebt'+i%>" style="color:#ffffff; background-color: #352960;width  :300px;" > APPROVE </button></a>
+                                <br><br><br>
+                                <a id="<%='rejectanchor'+i%>" href="<%='/requestprocessing/'+i+'/0/0'+'/rejected'%>" ><button onclick="removerejectbutton(<%=i%>)"  class="btn"  align="center" id="<%='rejectbt'+i%>" style="color:#ffffff; background-color: #352960;width  :300px;" > REJECT </button></a>
+                                <br><br><br>
+                                <h3 id="<%='text'+i%>"></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                <%
+                }
+                %>
 
                 <% } %>
                 <%}%>
@@ -358,7 +454,7 @@ tr:nth-child(even) td{
 
                 <%if(layout===2) {%>
 
-                <%if((data[i].approved)) {%>
+                <%if((data[i].approved=='approved')) {%>
                 <tr   onclick="getindividualreport(this)">
 
                     <td><%=i%></td>

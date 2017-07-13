@@ -13,12 +13,12 @@ function onRequest(request,response){
 
 		mongoClient.connect("mongodb://localhost:27017/msrmh",function(err,db){
 
-			if(err) throw err;
+			if(err) response.render("login",{message : "We encountered an Error. Please try again."},null);
 
 			console.log(request.session.username);
 			db.collection("empdetails").findOne({"_id" : request.session.username},function(err,result){
 
-				if(err) throw err;
+				if(err) response.render("login",{message : "We encountered an Error. Please try again."},null);
 
 				console.log(result);
 				response.render('emp/profile',{"obj" : result},null);

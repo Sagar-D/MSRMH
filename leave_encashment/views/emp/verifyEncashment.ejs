@@ -88,5 +88,25 @@ tr:nth-child(even) td{
 
 <h1 align="center"><%=obj.header%></h1>
 <p align="center" ><%=obj.msg%></p>
+<hr size="20px" style="color :  #352960; border-width: 2px; border-color: #352960; margin-top : 0px;">
+
+<h3 align="center" style="color : #352960;  ">Pending Encashment Requests</h3>
+
+<hr size="20px" style="color :  #352960; border-width: 2px; border-color: #352960; margin-top : 0px;">
+<table>
+<tr>
+<th> Application Date </th><th> Application Type </th><th>Application Status</th>
+</tr>
+<%
+for(i=0;i<list.length;i++){
+%>
+<tr>
+<td> <%= list[i].applicationDate %> </td><td> <%= list[i].type %> </td><td> <%= list[i].approved %> </td>
+</tr>
+<%
+}
+%>
+</table>
+
 </body>
 </html>

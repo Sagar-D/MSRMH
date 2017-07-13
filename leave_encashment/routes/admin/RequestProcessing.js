@@ -46,7 +46,7 @@ var details=new Schema({
     applicationDate:String,
     name:String,
     type:String,
-    approved:Boolean,
+    approved:String,
     department:String,
     noLeavesSurrendered:Number,
     report_id:String
@@ -69,6 +69,30 @@ var requestData=mongoose.model('requestData1',requests);
 /* GET users listing. */
 router.get('/:slno/:daa/:basepay/:approved', function(req, respond, next) {
 
+    slnumber=req.params.slno;
+
+    if(req.params.approved=='rejected')
+    {
+        var currentDate =new Date();
+        var idforrequest=(currentDate.getMonth()+1)+" "+ currentDate.getFullYear();
+
+        console.log(req.params.approved+slnumber);
+        requestData.findById(idforrequest).then(function (doc) {
+
+            try{
+            console.log(idforrequest);
+            doc.requestlist[slnumber].approved="rejected";
+            doc.save();
+
+            respond.redirect('/admin/admin',null,null);}catch (err){console.log(err)}
+
+        })
+
+
+
+
+        return;
+    }
 
 
     slnumber=req.params.slno;
@@ -107,7 +131,7 @@ router.get('/:slno/:daa/:basepay/:approved', function(req, respond, next) {
 
                 try{
 
-                    doc.requestlist[slnumber].approved=true;
+                    doc.requestlist[slnumber].approved="approved";
                     doc.requestlist[slnumber].report_id= fileforreport;
 
                     doc.save();
