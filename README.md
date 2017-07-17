@@ -2,7 +2,7 @@
 Leave Encashment WebApp
 
 
-Database Structure(MySql) :
+Database Structure(MongoDB) :
 
 1. userlogin : { "_id" : "emp1",
                  "password" : "sagar",
