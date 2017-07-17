@@ -1,30 +1,58 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <title>Ramaiah Memorial Hospital Leave Encashment</title>
-</head>
-<body>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 <style>
 div.logo{
-background:#4d004d;
+background:#352960;
 height:100%;
 width: 100%;
+margin : 0;
+padding: 25px;
 }
-ul{
-	background-color:#ff6600;
-	color: white;
+ul.mylist{
+  background-color:#352960;
+  color: white;
+  margin-top: 1px;
 }
-ul li{
-	background-color: #ff6600;
-	display: inline-block;
-	padding: 20px;
-	font-family:comic sans ms;	
+ul li.my{
+  background-color: #352960;
+  display: inline-block;
+  padding: 15px;
+  font-family:comic sans ms;  
+  color: #ffffff;
 }
+
+ul a{
+  text-decoration: none;
+  color: #ffffff;
+}
+ul a:hover{
+  color: #352940;
+}
+body {
+  background: #ffffff;   
+}
+
+
+</style>
+
+
+</head>
+<body style="padding:0px;margin:0px">
+<style>
+
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
   width: 360px;
-  padding: 8% 0 0;
+  padding: 5% 0 0;
   margin: auto;
 }
 .form {
@@ -51,7 +79,7 @@ ul li{
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
+  background: #352960;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -62,7 +90,7 @@ ul li{
   cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #43A047;
+  background: #352990;
 }
 .form .message {
   margin: 15px 0 0;
@@ -73,46 +101,8 @@ ul li{
   color: #4CAF50;
   text-decoration: none;
 }
-.form .register-form {
-  display: none;
-}
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 300px;
-  margin: 0 auto;
-}
-.container:before, .container:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-.container .info {
-  margin: 50px auto;
-  text-align: center;
-}
-.container .info h1 {
-  margin: 0 0 15px;
-  padding: 0;
-  font-size: 36px;
-  font-weight: 300;
-  color: #1a1a1a;
-}
-.container .info span {
-  color: #4d4d4d;
-  font-size: 12px;
-}
-.container .info span a {
-  color: #000000;
-  text-decoration: none;
-}
-.container .info span .fa {
-  color: #EF3B3A;
-}
-body {
-  background: #000099;
-    
-}
+
+
 </style>
 
 <div class="logo">
@@ -120,14 +110,6 @@ body {
 </div>
 
 
-<header>
-<ul>
-<li ><b>Leave Encashment</b></li>
-<li style="float:right";><a href='#'>Help</a></li>
-<li style="float:right";><a href='#'>Contact Us</a></li>
-<li style="float:right";><a href='#'>About</a></li>
-</ul>
-</header>
 
 <div class="login-page">
   <div class="form">
@@ -135,7 +117,8 @@ body {
     <form class="login-form" action="/validate" method="POST" >
       <input type="text" name="username" placeholder="username"/><br>
       <input type="password" name="password" placeholder="password"/><br>
-     <input type="checkbox"  name="admin" value="admin" style="margin:10px;" />Login as Admin<br><br>
+     <strong>Login As : </strong><input type="radio" checked name="admin" value="false" style="margin:10px;" />Employee
+     <input type="radio"  name="admin" value="true" style="margin:10px;" />Admin<br><br>
 	<button>login</button>
     </form>
   </div>

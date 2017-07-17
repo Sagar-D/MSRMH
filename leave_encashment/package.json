@@ -13,6 +13,16 @@
     "ejs": "^2.5.6",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
-    "mysql": "^2.13.0"
+    "json2xls": "^0.1.2",
+    "mongodb": "^2.2.29",
+    "mysql": "^2.13.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "mongoose": "^4.11.1",
+    "morgan": "~1.8.1",
+    "open": "0.0.5",
+    "pdfmake": "^0.1.31",
+    "serve-favicon": "~2.4.2"
+
   }
 }
