@@ -123,7 +123,8 @@ function onRequest(request,response){
 					jsonArr.push(obj);
 				}
 
-
+console.log("............... JsonArr ..............")
+console.log(jsonArr)
 				response.xls(fname+".xlsx",jsonArr);
 				//response.redirect('/admin/generateReports',null,null);
 
