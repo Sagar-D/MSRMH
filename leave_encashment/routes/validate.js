@@ -21,7 +21,7 @@ router.post('/validate',function(request,response){
 
 		db.collection("userlogin").findOne({"_id" : request.body.username },function(err,result){
 			if(err) throw err;
-console.log(result._id);
+
 			if(!result){
 				response.render("login",{message : "Invalid username. Please try again."},null);
 			}else{

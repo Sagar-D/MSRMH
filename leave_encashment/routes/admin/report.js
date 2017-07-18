@@ -63,7 +63,7 @@ function onRequest(request,response){
 										noOfLeavesSurrendered = result[key][i].clSurrendered;
 										break;
 							case 'SL' : leaveType = "Sick Leave Annual";
-										noOfLeavesSurrendered = result[key][i].clSurrendered;
+										noOfLeavesSurrendered = result[key][i].slSurrendered;
 										break;
 						}
 						obj["SlNo"] = result[key][i].serialNumber;
