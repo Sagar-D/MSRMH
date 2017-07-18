@@ -54,7 +54,7 @@ router.get('/',function (request,respond) {
 
         try{
         requestData.findById(idforrequest).then(function (doc) {
-            //var obj={"empId":"MH13","applicationDate":"14 9 2014","type":"EL","name":"swaroop","approved":false,"department":"Doctor","noLeavesSurrendered":30};
+            var obj={"empId":"MH13","applicationDate":"14 9 2014","type":"SL","name":"abcd","approved":false,"department":"Doctor","noLeavesSurrendered":30};
 
             try{
                 console.log(doc.requestlist);

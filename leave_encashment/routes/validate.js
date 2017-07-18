@@ -36,8 +36,8 @@ console.log(result._id);
 					request.session.username=request.body.username;
 					request.session.password=request.body.password;
 					request.session.admin=false;
-
-					if(request.body.admin){
+console.log(request.body.admin)
+					if(request.body.admin == true){
 						if(isAdmin){
 							request.session.admin=true;
 							response.redirect(303,"/admin/admin");	
