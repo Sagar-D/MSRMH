@@ -20,7 +20,7 @@ function onRequest(request,response){
 			var val = date.getMonth()+1;
 			val += " ";
 			val += date.getFullYear();
-			db.collection('requests').findOne({"_id" : "7 2017"},function(err,result){
+			db.collection('requests').findOne({"_id" : val},function(err,result){
 				if(err) response.render("login",{message : "We encountered an Error. Please try again."},null);
 
 				if(result!=null){

@@ -21,6 +21,7 @@ var details=new Schema({
     approved:String,
     department:String,
     noLeavesSurrendered:Number,
+    leaveBalance:Number,
     report_id:String
 
 });
@@ -54,21 +55,24 @@ router.get('/',function (request,respond) {
 
         try{
         requestData.findById(idforrequest).then(function (doc) {
-           // var obj={"empId":"MH13","applicationDate":"14 9 2014","type":"SL","name":"swaroop","approved":"pending","department":"Doctor","noLeavesSurrendered":30};
+            //var obj={"empId":"MH13","applicationDate":"14 9 2014","type":"SL","name":"swaroop","approved":"pending","department":"Doctor","noLeavesSurrendered":30,"leaveBalance":150};
 
             try{
                 console.log(doc.requestlist);
             doc.requestlist.push(obj);doc.save();
                 }catch(err){console.log(err.message)}
+            if(doc)
+            {  console.log("not first request");
 
             requestobj=doc.requestlist;
+               }
             
 
             respond.render('admin/admin',{data:requestobj,layout:1},null)
         });}
         catch (err){
-
-            respond.render('admin/admin',{data:dataempty,layout:1},null)
+            console.log(err);
+            respond.render('admin/admin',{data:requestobj,layout:1},null)
         }
     }else{
         respond.render('login',{message : "Session Timed Out!! Please Login to continue"},null);
@@ -88,6 +92,7 @@ router.post('/change',function (request,respond,next) {
          try{
          requestData.findById(idforrequest).then(function (doc) {
 
+            if(doc)
             requestobj=doc.requestlist;
            
 
@@ -103,7 +108,7 @@ router.post('/change',function (request,respond,next) {
             }
         });}
         catch(err){
-
+            console.log(err);
             respond.render('admin/admin',{data:requestobj,layout:1},null);
         }
 
@@ -183,6 +188,3 @@ module.exports = router;
 /*router.get('/download',function (req,res,nesxt) {
  res.sendfile('pdfs/'+EL_encshment_form.form_details_for_EL.report_id+'.pdf');
  });*/
-
-
-
