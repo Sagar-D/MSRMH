@@ -22,14 +22,14 @@ function onRequest(request,response){
 
         mongoClient.connect("mongodb://localhost:27017/msrmh",function(err,db){
 
-            if(err) throw err;
+            if(err) response.render("login",{message : "We encountered an Error. Please try again."+err},null);;
 
             var str = request.body.date;
             var dateArr = str.split(" ");
 
             var fname = ""
             db.collection('reports').findOne({"_id" : parseInt(dateArr[1])},function(er,result){
-                if(er) throw er;
+                if(er) response.render("login",{message : "We encountered an Error. Please try again."+err},null);;
 
 
                 console.log(request.body.type)
