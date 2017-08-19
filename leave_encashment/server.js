@@ -15,8 +15,10 @@ var validate = require('./routes/validate');
 var logout = require('./routes/logout');
 
 var admin = require('./routes/admin/PendingRequests');
-var generateReports = require('./routes/admin/generateReports')
-var report = require('./routes/admin/report')
+var generateReports = require('./routes/admin/generateReports');
+var upload = require('./routes/admin/upload');
+var processupload = require('./routes/admin/processupload');
+var report = require('./routes/admin/report');
 var RequestProcessing=require('./routes/admin/RequestProcessing');
 
 
@@ -54,6 +56,8 @@ app.get('/logout',logout);
 //app.post('/admin/admin/change',admin)
 app.use('/admin/admin',admin);
 app.get('/admin/generateReports',generateReports);
+app.get('/admin/upload',upload);
+app.post('/admin/processupload',processupload);
 app.post('/admin/report',report);
 app.use('/requestprocessing',RequestProcessing);
 

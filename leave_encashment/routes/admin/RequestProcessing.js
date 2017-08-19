@@ -98,7 +98,8 @@ router.get('/:slno/:daa/:basepay/:approved', function(req, respond, next) {
     slnumber=req.params.slno;
     daa=req.params.daa;
     basepay=req.params.basepay;
-    total=parseInt(daa)+parseInt(basepay); //write correct logic
+    total=parseInt(basepay)*(parseInt(daa)/100)+parseInt(basepay);
+    total=parseInt(total); //write correct logic
 
     var currentDate =new Date();
     var idforrequest=(currentDate.getMonth()+1)+" "+ currentDate.getFullYear();

@@ -1,0 +1,15 @@
+id ,name,designation,department,status,lop,slbalance,elbalance,clbalance,password,clpreviousencashment,slpreviousencashment,elpreviousencashment
+emp1,jan,billing,accounts,permanent,5,10,30,10,sagar,11/12/2017,11/12/2017,11/12/2017
+emp2,feb,nursing,accounts,permanent,10,20,40,20,password,11/13/2017,11/13/2017,11/13/2017
+emp3,mar,billing,accounts,permanent,15,30,50,30,password,11/14/2017,11/14/2017,11/14/2017
+emp4,apr,nursing,accounts,permanent,20,40,60,40,password,11/15/2017,11/15/2017,11/15/2017
+emp5,may,billing,accounts,permanent,25,50,70,50,password,11/16/2017,11/16/2017,11/16/2017
+emp6,jun,nursing,accounts,permanent,30,60,80,60,password,11/17/2017,11/17/2017,11/17/2017
+emp7,jul,billing,accounts,permanent,35,70,90,70,password,11/18/2017,11/18/2017,11/18/2017
+emp8,aug,nursing,accounts,permanent,40,80,100,80,password,11/19/2017,11/19/2017,11/19/2017
+emp9,sep,billing,accounts,permanent,45,90,110,90,password,11/20/2017,11/20/2017,11/20/2017
+emp10,oct,nursing,accounts,permanent,50,100,120,100,password,11/21/2017,11/21/2017,11/21/2017
+emp11,nov,billing,accounts,permanent,55,110,130,110,password,11/22/2017,11/22/2017,11/22/2017
+emp12,dec,nursing,accounts,permanent,0,120,140,120,sagar,11/23/2017,11/23/2017,1/23/2017
+emp13,ramsy,buris,admin,permanent12,0,20,69,120,password1,11/23/2017,11/23/2017,1/23/2017
+emp15,yo,buris,admin,permanent12,0,20,69,120,password1,11/23/2017,11/23/2017,1/23/2017

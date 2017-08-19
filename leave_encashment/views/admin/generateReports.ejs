@@ -68,6 +68,25 @@ tr:nth-child(even) {
 tr:nth-child(even) td{
     border-left: 1px solid #ffffff;
 }
+h1 {
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+    margin-left: 0;
+    margin-right: 0;
+    text-align:right;
+    color:#FFFFFF;
+}
+}
+
+footer{
+    color: #BF360C;
+    margin: 2em;
+    position:fixed;
+    bottom:0px;
+}
 
 
 </style>
@@ -78,16 +97,17 @@ tr:nth-child(even) td{
 
 
 <div class="logo">
-<img src="/logo1.png" alt="Logo" width="250" height="90">
+    <img src="/logo1.png" alt="Logo" width="220" height="70" align="left">
+    <h1>Human Resources department</h1>
 </div>
 
 
 <nav>
 <ul class="mylist">
-<li class="my"><b>Leave Encashment</b></li>
+<li class="my"><b>Generate Report</b></li>
 <a href='/logout'><li class="my" style="float:right";>Logout</li></a>
-<a href='#'><li class="my" style="float:right";>Generate Report</li></a>
 <a href='admin'><li class="my" style="float:right;">Encashment Requests</li></a>
+    <a href='/admin/upload'><li class="my" style="float:right";>Upload data</li></a>
 </ul>
 </nav>
 
@@ -122,6 +142,10 @@ tr:nth-child(even) td{
 </form>
 
 </center>
+
+<footer >
+    <p>Powered by: Department of Information Science & Engineeering, Ramaih Institute of Technology - for: Human Resources Department, Ramaih Memorial Hospital</p>
+</footer>
 
 </body>
 </html>
